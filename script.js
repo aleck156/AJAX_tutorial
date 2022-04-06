@@ -4,12 +4,13 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
+
+const renderCountry = function () {};
+
 const getCountryData = function (country) {
   const req = new XMLHttpRequest();
   req.open('GET', `https://restcountries.com/v3.1/name/${country}`);
   req.send();
-
-  console.log(req.responseText);
 
   req.addEventListener('load', function () {
     const [data] = JSON.parse(this.responseText);
