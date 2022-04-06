@@ -39,3 +39,4 @@ const getCountryData = function (country) {
 };
 
 getCountryData(`poland`);
+getCountryData(`germany`);
