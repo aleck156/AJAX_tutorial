@@ -81,9 +81,9 @@ const getCountryAndNeighbor = function (country) {
 
     if (!neighbour) return;
 
-    const req = new XMLHttpRequest();
-    req.open('GET', `https://restcountries.com/v3.1/name/${neighbour}`);
-    req.send();
+    const req2 = new XMLHttpRequest();
+    req2.open('GET', `https://restcountries.com/v3.1/name/${neighbour}`);
+    req2.send();
   });
 };
 
