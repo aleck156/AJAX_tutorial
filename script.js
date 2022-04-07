@@ -42,11 +42,11 @@ const countriesContainer = document.querySelector('.countries');
 // getCountryData(`poland`);
 // getCountryData(`germany`);
 
-const renderCountry = function (data) {
+const renderCountry = function (data, className = '') {
   const currencies = data.currencies[Object.keys(data.currencies)[0]].name;
 
   const html = ` 
-    <article class="country">
+    <article class="country ${className}">
       <img class="country__img" src="${data.flags.png}" />
       <div class="country__data">
         <h3 class="country__name">${data.name.common}</h3>
@@ -78,7 +78,7 @@ const getCountryAndNeighbor = function (country) {
 
     // get neighbour country (2)
     const [neighbour] = data.borders;
-
+    console.log(neighbour);
     if (!neighbour) return;
 
     const req2 = new XMLHttpRequest();
@@ -86,9 +86,24 @@ const getCountryAndNeighbor = function (country) {
     req2.send();
 
     req2.addEventListener('load', function () {
-      console.log(this.responseText);
+      const [data2] = JSON.parse(this.responseText);
+      console.log(data2);
+      renderCountry(data2, 'neighbour');
     });
   });
 };
 
-getCountryAndNeighbor('portugal');
+getCountryAndNeighbor('usa');
+
+setTimeout(() => {
+  console.log(`1 second passed`);
+  setTimeout(() => {
+    console.log(`2 seconds passed`);
+    setTimeout(() => {
+      console.log(`3 second passed`);
+      setTimeout(() => {
+        console.log(`4 second passed`);
+      }, 4000);
+    }, 3000);
+  }, 2000);
+}, 1000);
