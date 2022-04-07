@@ -31,9 +31,12 @@ const renderCountry = function (data, className = '') {
 // request.then(e => console.log(e));
 
 const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`).then(function (res) {
-    console.log(res);
-  });
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(function (res) {
+      console.log(res);
+      return res.json();
+    })
+    .then(data => renderCountry(data[0]));
 };
 
 getCountryData('poland');
