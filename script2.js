@@ -39,16 +39,25 @@ const getCountryData = function (country) {
       if (!neighbours) return;
 
       console.log(neighbours);
-      neighbours.forEach(elem =>
-        fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
-          .then(res => res.json())
-          .then(([neighbourCountry]) =>
-            console.log(
-              `${neighbourCountry.flag} ${neighbourCountry.name.common}`
-            )
-          )
-      );
-    });
+
+      // this is still a callback hell, needs to be restructured
+      // neighbours.forEach(elem =>
+      //   fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
+      //     .then(res => res.json())
+      //     .then(([neighbourCountry]) =>
+      //       console.log(
+      //         `${neighbourCountry.flag} ${neighbourCountry.name.common}`
+      //       )
+      //     )
+      // );
+
+      const neighbour = data[0].borders[0];
+      console.log(neighbour);
+
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+    })
+    .then(res => res.json())
+    .then(data => renderCountry(data[0], 'neighbour'));
 };
 
-getCountryData('poland');
+getCountryData('portugal');
