@@ -32,10 +32,7 @@ const renderCountry = function (data, className = '') {
 
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(function (res) {
-      console.log(res);
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => renderCountry(data[0]));
 };
 
