@@ -33,7 +33,14 @@ const renderCountry = function (data, className = '') {
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(res => res.json())
-    .then(data => renderCountry(data[0]));
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbours = data[0].borders;
+      if (!neighbours) return;
+
+      console.log(neighbours);
+      neighbours.forEach(elem => console.log(elem));
+    });
 };
 
 getCountryData('poland');
