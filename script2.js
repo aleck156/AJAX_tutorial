@@ -39,7 +39,15 @@ const getCountryData = function (country) {
       if (!neighbours) return;
 
       console.log(neighbours);
-      neighbours.forEach(elem => console.log(elem));
+      neighbours.forEach(elem =>
+        fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
+          .then(res => res.json())
+          .then(([neighbourCountry]) =>
+            console.log(
+              `${neighbourCountry.flag} ${neighbourCountry.name.common}`
+            )
+          )
+      );
     });
 };
 
