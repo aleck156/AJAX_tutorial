@@ -60,4 +60,4 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0], 'neighbour'));
 };
 
-getCountryData('portugal');
+getCountryData('poland');
