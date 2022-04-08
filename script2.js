@@ -44,12 +44,15 @@ const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
 };
 
+const getJSON = function (url, errorMsg = 'Something went Horribly wrong') {
+  return fetch(url).then(res => {
+    if (!res.ok) throw new Error(`${errorMsg} (${res.status})`);
+    return res.json();
+  });
+};
+
 const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(res => {
-      if (!res.ok) throw new Error(`Country not found (${res})`);
-      return res.json();
-    })
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, `Country not found`)
     .then(data => {
       renderCountry(data[0]);
       const neighbours = data[0].borders;
