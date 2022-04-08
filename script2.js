@@ -80,8 +80,16 @@ btn.addEventListener('click', () => {
 
 const whereAmI = function (lat, lng) {
   fetch(`https://geocode.xyz/${lat},${lng}?json=1`)
-    .then(res => res.json())
-    .then(data => console.log(data));
+    .then(res => {
+      if (!res.ok)
+        throw new Error(`[${res.status}]: Houston, we have a problem`);
+      return res.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+    })
+    .catch(err => console.log(err));
 };
 
 /*
