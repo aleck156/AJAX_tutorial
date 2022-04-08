@@ -30,27 +30,30 @@ const renderCountry = function (data, className = '') {
 
 // request.then(e => console.log(e));
 
+const getNeighbourData = function (neighbours) {
+  neighbours.forEach(elem =>
+    fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
+      .then(res => res.json())
+      .then(([neighbourCountry]) => {
+        console.log(`${neighbourCountry.flag} ${neighbourCountry.name.common}`);
+        // renderCountry(neighbourCountry, 'neighbour');
+      })
+  );
+};
+
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(res => res.json())
+    .then(
+      res => res.json(),
+      error => alert(error)
+    )
     .then(data => {
       renderCountry(data[0]);
       const neighbours = data[0].borders;
       if (!neighbours) return;
 
       console.log(neighbours);
-
-      // this is still a callback hell, needs to be restructured
-      neighbours.forEach(elem =>
-        fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
-          .then(res => res.json())
-          .then(([neighbourCountry]) => {
-            console.log(
-              `${neighbourCountry.flag} ${neighbourCountry.name.common}`
-            );
-            // renderCountry(neighbourCountry, 'neighbour');
-          })
-      );
+      getNeighbourData(neighbours);
 
       const neighbour = data[0].borders[0];
       console.log(neighbour);
