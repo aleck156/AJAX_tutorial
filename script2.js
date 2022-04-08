@@ -88,6 +88,7 @@ const whereAmI = function (lat, lng) {
     .then(data => {
       console.log(data);
       console.log(`You are in ${data.city}, ${data.country}`);
+      getCountryData(data.country);
     })
     .catch(err => console.log(err));
 };
@@ -102,4 +103,4 @@ const loc1 = [52.508, 13.381];
 const loc2 = [19.037, 72.873];
 const loc3 = [-33.933, 18.474];
 
-whereAmI(...loc1);
+whereAmI(...loc3);
