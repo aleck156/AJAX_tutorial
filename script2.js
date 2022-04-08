@@ -97,5 +97,9 @@ Test data:
 § Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
 § Coordinates 2: 19.037, 72.873
 § Coordinates 3: -33.933, 18.474
-
 */
+const loc1 = [52.508, 13.381];
+const loc2 = [19.037, 72.873];
+const loc3 = [-33.933, 18.474];
+
+whereAmI(...loc1);
