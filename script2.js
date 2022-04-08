@@ -77,3 +77,17 @@ const getCountryData = function (country) {
 btn.addEventListener('click', () => {
   getCountryData('poland');
 });
+
+const whereAmI = function (lat, lng) {
+  fetch(`https://geocode.xyz/${lat},${lng}?json=1`)
+    .then(res => res.json())
+    .then(data => console.log(data));
+};
+
+/*
+Test data:
+§ Coordinates 1: 52.508, 13.381 (Latitude, Longitude)
+§ Coordinates 2: 19.037, 72.873
+§ Coordinates 3: -33.933, 18.474
+
+*/
