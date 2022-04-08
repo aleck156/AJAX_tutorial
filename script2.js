@@ -41,15 +41,16 @@ const getCountryData = function (country) {
       console.log(neighbours);
 
       // this is still a callback hell, needs to be restructured
-      // neighbours.forEach(elem =>
-      //   fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
-      //     .then(res => res.json())
-      //     .then(([neighbourCountry]) =>
-      //       console.log(
-      //         `${neighbourCountry.flag} ${neighbourCountry.name.common}`
-      //       )
-      //     )
-      // );
+      neighbours.forEach(elem =>
+        fetch(`https://restcountries.com/v3.1/alpha/${elem}`)
+          .then(res => res.json())
+          .then(([neighbourCountry]) => {
+            console.log(
+              `${neighbourCountry.flag} ${neighbourCountry.name.common}`
+            );
+            // renderCountry(neighbourCountry, 'neighbour');
+          })
+      );
 
       const neighbour = data[0].borders[0];
       console.log(neighbour);
