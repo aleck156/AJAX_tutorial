@@ -56,7 +56,7 @@ const getCountryData = function (country) {
     .then(data => {
       renderCountry(data[0]);
       const neighbours = data[0].borders;
-      if (!neighbours) return;
+      if (!neighbours) throw new Error(`No neighbours found`);
 
       console.log(neighbours);
       getNeighbourData(neighbours);
