@@ -46,7 +46,10 @@ const renderError = function (msg) {
 
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found (${res})`);
+      return res.json();
+    })
     .then(data => {
       renderCountry(data[0]);
       const neighbours = data[0].borders;
