@@ -43,10 +43,7 @@ const getNeighbourData = function (neighbours) {
 
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then(
-      res => res.json(),
-      error => alert(error)
-    )
+    .then(res => res.json())
     .then(data => {
       renderCountry(data[0]);
       const neighbours = data[0].borders;
@@ -61,7 +58,8 @@ const getCountryData = function (country) {
       return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
     })
     .then(res => res.json())
-    .then(data => renderCountry(data[0], 'neighbour'));
+    .then(data => renderCountry(data[0], 'neighbour'))
+    .catch(err => console.error(`Not enough! ${err}`));
 };
 
 btn.addEventListener('click', () => {
