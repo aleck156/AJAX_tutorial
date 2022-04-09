@@ -104,5 +104,10 @@ const loc2 = [19.037, 72.873];
 const loc3 = [-33.933, 18.474];
 
 whereAmI(...loc1);
-whereAmI(...loc2);
-whereAmI(...loc3);
+// whereAmI(...loc2);
+// whereAmI(...loc3);
+
+console.log(`Test Start`);
+setTimeout(() => console.log(`0 sec timer`), 0);
+Promise.resolve('Promise resolved').then(res => console.log(res));
+console.log(`Test End`);
