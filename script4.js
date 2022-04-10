@@ -32,7 +32,7 @@ const whereAmI = async function (country) {
 
   */
 };
-whereAmI('poland');
+whereAmI(getPosition());
 
 console.log(`async/await`);
 
