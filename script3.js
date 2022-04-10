@@ -24,3 +24,17 @@ wait(2)
     return wait(1);
   })
   .then(() => console.log(`and another 1 second has passed ...`));
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then(res => {
+  console.log(res);
+});
