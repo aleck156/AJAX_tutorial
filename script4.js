@@ -10,7 +10,7 @@ const getPosition = function () {
   });
 };
 
-const whereAmI = async function (country) {
+const whereAmI = async function () {
   const pos = await getPosition();
   const { latitude: lat, longitude: lng } = pos.coords;
 
@@ -32,7 +32,7 @@ const whereAmI = async function (country) {
 
   */
 };
-whereAmI(getPosition());
+whereAmI();
 
 console.log(`async/await`);
 
