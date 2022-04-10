@@ -13,8 +13,14 @@ const getPosition = function () {
 const whereAmI = async function (country) {
   const pos = await getPosition();
   const { latitude: lat, longitude: lng } = pos.coords;
-  console.log(lat, lng);
-  const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+
+  const geocode = await fetch(`https://geocode.xyz/${lat},${lng}?json=1`);
+  const geocodeJSON = await geocode.json();
+  console.log(geocodeJSON);
+
+  const res = await fetch(
+    `https://restcountries.com/v3.1/name/${geocodeJSON.country}`
+  );
   const [resJSON] = await res.json();
   console.log(resJSON);
   renderCountry(resJSON);
