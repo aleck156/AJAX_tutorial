@@ -9,6 +9,7 @@ const imgArr = ['./img/img-1.jpg', './img/img-2.jpg', './img/img-3.jpg'];
 const createImage = function (imgPath) {
   return new Promise(function (resolve, reject) {
     newImage.src = imgPath;
+    newImage.style.display = 'flex';
 
     newImage.addEventListener('error', function () {
       reject(new Error(`Image not found: ${imgPath}`));
@@ -35,18 +36,38 @@ const createImage = function (imgPath) {
 //   })
 //   .catch(err => console.error(`erorr: ${err}`));
 
-// const loadNPause = async function () {
-//   const res = await createImage(`./img/img-1.jpg`);
-//   console.log(res);
-// };
-
-// loadNPause();
-
-const loadAll = async function (imgArr) {
-  console.log(imgArr);
-  const imgs = imgArr.map(img => createImage(img));
-
-  console.log(await Promise.all(imgs));
+const wait = function (seconds) {
+  return new Promise((resolve, reject) => setTimeout(resolve, seconds * 1000));
 };
 
-loadAll(imgArr);
+const loadNPause = async function () {
+  try {
+    let img = await createImage(`./img/img-1.jpg`);
+    console.log(img);
+    await wait(2);
+    img.style.display = 'none';
+
+    img = await createImage(`./img/img-2.jpg`);
+    console.log(img);
+    await wait(2);
+    img.style.display = 'none';
+
+    img = await createImage(`./img/img-3.jpg`);
+    console.log(img);
+    await wait(2);
+    img.style.display = 'none';
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+loadNPause();
+
+// const loadAll = async function (imgArr) {
+//   console.log(imgArr);
+//   const imgs = imgArr.map(img => loadNPause(img));
+
+//   console.log(await Promise.all(imgs));
+// };
+
+// loadAll(imgArr);
