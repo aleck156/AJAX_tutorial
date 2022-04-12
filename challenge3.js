@@ -2,6 +2,9 @@
 
 const images = document.querySelector('.images');
 const newImage = document.createElement('img');
+const imgArr = ['./img/img-1.jpg', './img/img-2.jpg', './img/img-3.jpg'];
+
+/////////////////////////////////////////////
 
 const createImage = function (imgPath) {
   return new Promise(function (resolve, reject) {
@@ -32,9 +35,18 @@ const createImage = function (imgPath) {
 //   })
 //   .catch(err => console.error(`erorr: ${err}`));
 
-const loadNPause = async function () {
-  const res = await createImage(`./img/img-1.jpg`);
-  console.log(res);
+// const loadNPause = async function () {
+//   const res = await createImage(`./img/img-1.jpg`);
+//   console.log(res);
+// };
+
+// loadNPause();
+
+const loadAll = async function (imgArr) {
+  console.log(imgArr);
+  const imgs = imgArr.map(img => createImage(img));
+
+  console.log(await Promise.all(imgs));
 };
 
-loadNPause();
+loadAll(imgArr);
