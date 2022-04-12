@@ -6,7 +6,7 @@ const imgArr = ['./img/img-1.jpg', './img/img-2.jpg', './img/img-3.jpg'];
 
 /////////////////////////////////////////////
 
-const createImage = function (imgPath) {
+const createImage = async function (imgPath) {
   return new Promise(function (resolve, reject) {
     newImage.src = imgPath;
     newImage.style.display = 'flex';
@@ -61,7 +61,20 @@ const loadNPause = async function () {
   }
 };
 
-loadNPause();
+// loadNPause();
+
+const loadAll = async function (imgArr) {
+  try {
+    const imgs = imgArr.map(async image => createImage(image));
+    const imgsEl = await Promise.all(imgs);
+
+    console.log(imgsEl);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+loadAll(imgArr);
 
 // const loadAll = async function (imgArr) {
 //   console.log(imgArr);
