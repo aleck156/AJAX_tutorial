@@ -1,24 +1,23 @@
 'use strict';
 
 const images = document.querySelector('.images');
-const newImage = document.createElement('img');
-const imgArr = ['./img/img-1.jpg', './img/img-2.jpg', './img/img-3.jpg'];
+const imgArr = ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'];
 
 /////////////////////////////////////////////
 
 const createImage = async function (imgPath) {
   return new Promise(function (resolve, reject) {
+    const newImage = document.createElement('img');
     newImage.src = imgPath;
-    newImage.style.display = 'flex';
+    // newImage.style.display = 'block';
 
     newImage.addEventListener('error', function () {
       reject(new Error(`Image not found: ${imgPath}`));
     });
     newImage.addEventListener('load', () => {
-      images.insertAdjacentElement('afterbegin', newImage);
+      images.append(newImage);
+      resolve(newImage);
     });
-
-    return resolve(newImage);
   });
 };
 
@@ -67,6 +66,8 @@ const loadAll = async function (imgArr) {
   try {
     const imgs = imgArr.map(async image => createImage(image));
     const imgsEl = await Promise.all(imgs);
+
+    imgsEl.forEach(img => img.classList.add('parallel'));
 
     console.log(imgsEl);
   } catch (error) {
